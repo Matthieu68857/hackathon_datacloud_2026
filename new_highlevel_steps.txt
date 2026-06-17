@@ -1,0 +1,55 @@
+Hackathon Narrative: "From Park Analytics to Real-Time Guest Assistance"
+The Mission: Your team is tasked with building the next-generation intelligent backend and guest assistant for Disneyland. You will ingest operational data, run predictive ML, map guest movements using graph databases, set up an internal conversational analytics engine for the park managers, and finally push these insights back to a live agent that guides visitors in real-time.
+
+
+Track 1: Data Foundation (Operational to Analytical)
+The Data Engineer's domain. Setting up the data pipelines and basic vectorization.
+Step 1: Load the operational data (Disneyland reviews, attraction catalogs) into AlloyDB.
+Step 2: Set up Datastream to replicate this operational data into BigQuery in near real-time.
+Step 3: Use AlloyDB's pgvector and model endpoint integrations to generate and store vector embeddings for the attraction descriptions (useful later for semantic search).
+Step 4: Use Data Canvas in BigQuery to build a quick, high-level dashboard of the ingested raw data to prove the pipeline is flowing.
+
+
+Track 2: Data Science & ML (Predictive & Sentiment)
+The Data Scientist's domain. Can be parallelized immediately using raw CSVs in BigQuery before Track 1 finishes.
+Step 1: Use the new Data Science Agent in BigQuery Studio to automatically write code and queries that analyze the Disneyland reviews (extracting sentiment, identifying complaints vs. praises).
+Step 2: Build a BQML model to forecast wait times for attractions based on historical time-series data.
+Step 3: Classify rides by intensity and popularity using K-means clustering in BQML.
+Step 4: Write the results (Wait Time Forecasts, Ride Classifications) into a consolidated BigQuery dataset.
+
+
+Track 3: Multimodal & RAG Analytics
+Step 1 (Image Analysis): Create a BigQuery object table over a GCS bucket of mixed attraction park photos. Use ML.GENERATE_TEXT with a multimodal model (Gemini Pro Vision) to identify which images are actually from Disneyland.
+Step 2 (RAG - Ingestion): Create a second object table over the PDF park brochures. Use a BQML remote function to chunk the PDFs and generate embeddings for each chunk, storing them in a new table.
+Step 3 (RAG - Querying): Create a final remote model that uses Vertex AI Search or a vector search index to perform RAG.
+Step 4 (Validation): Ask a question against the brochures that can only be answered by the RAG system, such as "Where can I find a buffet-style Tex-Mex meal?"
+
+
+Track 4: Graph Analytics (Visitor Movement)
+The Graph Specialist's domain. Focused entirely on the new movement dataset.
+Step 1: Ingest the new visitor movement dataset (logs of visitors moving from Attraction A -> Attraction B -> Attraction C).
+Step 2: Build a property graph on BigQuery (acting as the analytical edges/historical movement logs).
+Step 3: Write graph queries to detect patterns:
+What are the top 3 rides people run to after Space Mountain?
+Where do bottlenecks form at 2 PM?
+Step 4: Output a "Recommended Next Ride" routing table based on graph calculations.
+
+
+Track 5: Conversational Analytics (The Internal AI Analyst)
+The Data Analyst's domain. Setting up the semantic layer for park managers.
+Step 1: Setup Conversational Analytics (CA) on top of the BigQuery datasets.
+Step 2: Knowledge Catalog Integration: Define the semantic layer, metrics, and synonyms (e.g., ensuring the agent knows that "Space Mountain" is a "rollercoaster").
+Step 3: Define Golden Queries to train the CA engine (e.g., standardizing how wait times are calculated so the AI doesn't hallucinate metrics).
+Step 4: Query the Data & the Graph: Park managers use the CA chat interface to ask complex questions across the data silos: "Which attractions have the highest negative sentiment today, and what is the most common path visitors take after leaving them?"
+
+
+Track 6: Building the Real-Time Guest Assistant
+When Track 5 is finished (if not, you can start the with the second part by mocking AlloyDB data)
+Step 1: Take the finalized insight tables from Track 2 (Wait time forecasts) and Track 4 (Graph-based routing recommendations).
+Step 2: Set up the One-Click Reverse ETL pipeline to seamlessly push these analytical insights from BigQuery back into AlloyDB.
+Step 3: Use QueryData on AlloyDB to expose these newly imported insights. Participants will write the needed context to create and expose the agent.
+The AI/App Developer's domain. Can start immediately by mocking the AlloyDB data.
+Step 1: Use the Data Agent Kit in VSCode to scaffold a custom, real-time AI agent for park visitors using ADK.
+Step 2: Connect the agent to the AlloyDB using the QueryData API through MCP Toolbox for databases.
+Step 3: Prompt engineer the agent to act as a helpful park guide. It should use the AlloyDB data (forecasted wait times, graph-recommended paths) to answer guest queries like: "I just finished Pirates of the Caribbean, what should I do next to avoid crowds?"
+Step 4: Deploy the agent to a simple web application (e.g., Cloud Run) to complete the end-to-end hackathon showcase.
