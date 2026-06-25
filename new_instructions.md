@@ -36,13 +36,14 @@ In this hack, you will build an end-to-end agentic data pipeline leveraging AI/M
 
 ## Challenges
 
--   **Challenge 1**: [Data Foundation (Operational to Analytical)](#challenge-1-data-foundation-operational-to-analytical)
--   **Challenge 2**: [Exposing AlloyDB via QueryData & MCP Toolbox (Database Agentic Layer)](#challenge-2-exposing-alloydb-via-querydata--mcp-toolbox-database-agentic-layer)
--   **Challenge 3**: [Data Science & ML (Predictive & Sentiment)](#challenge-3-data-science--ml-predictive--sentiment)
--   **Challenge 4**: [Multimodal & RAG Analytics](#challenge-4-multimodal--rag-analytics)
--   **Challenge 5**: [Graph Analytics (Visitor Movement)](#challenge-5-graph-analytics-visitor-movement)
--   **Challenge 6**: [Conversational Analytics (The Internal AI Analyst)](#challenge-6-conversational-analytics-the-internal-ai-analyst)
--   **Challenge 7**: [Building the Real-Time Guest Assistant](#challenge-7-building-the-real-time-guest-assistant)
+- Challenge 1: Data Foundation (Operational to Analytical)
+- Challenge 2: Exposing AlloyDB via QueryData & MCP Toolbox (Database Agentic Layer)
+- Challenge 3: Data Science & ML (Predictive & Sentiment)
+- Challenge 4: Multimodal & RAG Analytics
+- Challenge 5: Graph Analytics (Visitor Movement)
+- Challenge 6: Conversational Analytics (The Internal AI Analyst)
+- Challenge 7: Building the Real-Time Guest Assistant
+
 
 ---
 
@@ -168,10 +169,10 @@ To support semantic searches on our attractions, we need to generate and store v
     ALTER TABLE disneyland_attractions ADD COLUMN embedding vector(3072);
     ```
 3.  **Generate Embeddings:**
-    Populate the `embedding` column by calling Vertex AI's embedding model natively from SQL:
+    Populate the `embedding` column by calling Gemini Enterprise Agent Platform's embedding model natively from SQL:
     ```sql
     -- TODO: Write an UPDATE query that populates the `embedding` column by calling 
-    -- Vertex AI's embedding model natively from SQL using the 'gemini-embedding-001' model.
+    -- Gemini Enterprise Agent Platform's embedding model natively from SQL using the 'gemini-embedding-001' model.
     ```
 
 #### Task 1.3: Set Up Real-Time Replication with One-Click Datastream
