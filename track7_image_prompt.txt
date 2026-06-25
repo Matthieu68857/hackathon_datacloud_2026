@@ -1,4 +1,4 @@
-A clean, minimalist, high-resolution system architecture diagram for the Track 7 Guest Assistant. The design style matches the dark mode and glowing neon line aesthetic of the reference poster, but is significantly simplified to focus on clear architectural blocks. The background is a solid very dark gray/black canvas, completely free of busy background grids or digital clutter. The diagram features a simple, linear, easy-to-read layout showing exactly five glowing blocks in a clear flow:
+A clean, minimalist, high-resolution system architecture diagram for the Track 7 Guest Assistant. The background is a premium deep blue/black technology canvas featuring very soft, subtle glowing neon circuit patterns, light rays, and abstract digital network trails in the background, matching the depth and visual style of the reference poster. The diagram itself is kept extremely simple, linear, and easy to read, displaying exactly five glowing blocks in a clear flow:
 1. "BigQuery" (Database icon with a subtle blue neon glow)
 2. "AlloyDB" (Database icon with a warm orange neon glow)
 3. "MCP Toolbox" (API/connector icon with a soft gold neon glow)
@@ -11,4 +11,4 @@ The flow is connected by simple, clean, glowing neon arrows with minimalist labe
 - Double-ended arrow between "MCP Toolbox" and "ADK Agent" labeled "Model Context Protocol"
 - Double-ended arrow between "ADK Agent" and "Web App on Cloud Run" labeled "App API"
 
-The entire graphic has a high-end, uncluttered, professional 2D vector infographic aesthetic, with clean typography, sharp labels, and soft neon outlines. No redundant text or duplicate icons. No device frames.
+The entire graphic has a high-end, uncluttered, professional 2D vector infographic aesthetic, with clean typography, sharp labels, and soft neon outlines, presented over a beautiful glowing tech background. No redundant text or duplicate icons. No device frames.
