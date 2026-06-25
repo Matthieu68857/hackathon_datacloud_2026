@@ -1,5 +1,7 @@
 # Disneyland Agentic Data Cloud gHack
 
+![Disneyland Agentic Data Cloud 7-Track Architecture](images/ghack_7track_architecture.png)
+
 ## Introduction
 
 Welcome, Disney Data Wizards! 🪄
