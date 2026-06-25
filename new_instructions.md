@@ -587,26 +587,7 @@ This is the final integration and application track! Because the entire database
 
 In this architecture, the ADK Guest Assistant agent only queries AlloyDB (using the MCP Toolbox server). It does not contain any direct BigQuery connections or tools. All BigQuery analytical insights (forecasting, graph routings) are pulled into the conversation seamlessly because the agent queries AlloyDB's FDW foreign tables under the hood, ensuring high security and low agent complexity.
 
-```mermaid
-graph LR
-    subgraph Operational Layer [AlloyDB - Structured in Track 2]
-        ADB[(AlloyDB)]
-        FDW[BigQuery FDW]
-        AIOP[AlloyDB AI Operators]
-    end
-
-    subgraph Agentic Layer [AI Agent & Web Serving - Created in Track 7]
-        MCP[MCP Toolbox Server]
-        ADK[ADK Agent]
-        UI[Vibe-Coded Web App]
-        CR[Cloud Run]
-        
-        AIOP -->|Exposed as SQL Tools| MCP
-        MCP -->|Model Context Protocol| ADK
-        ADK -->|Serves Web UI| UI
-        UI -->|Deploys to| CR
-    end
-```
+![Track 7 Architecture](images/track7_architecture.png)
 
 ### 7.1 Scaffold the Guest Assistant with ADK
 
