@@ -1,16 +1,14 @@
-A premium, high-resolution architectural system diagram illustrating the Track 7 Guest Assistant Architecture. The design style, dark theme, glowing neon lines, and modern typography must exactly match the reference poster. The background is a very dark, polished blue/black canvas. The diagram is divided into two main glowing glassmorphic panels/layers:
-1. "Operational Layer (AlloyDB)" (Glows with warm orange/gold light):
-   - A central "AlloyDB" database cylinder icon.
-   - An attached "BigQuery FDW" bridge icon showing analytical data (wait times, graph recommendations) flowing in.
-   - An "AlloyDB AI Operators" node representing vector and semantic search.
-2. "Agentic & Serving Layer" (Glows with electric purple/cyan light):
-   - An "MCP Toolbox Server" node.
-   - An "ADK Agent" brain icon powered by Gemini.
-   - A "Vibe-Coded Web App" showing a premium dark-mode dashboard interface.
-   - A "Cloud Run" container ship/deploy icon representing hosting.
-Glowing neon flow arrows trace the connections:
-- The FDW bridge feeds BigQuery data into AlloyDB.
-- AlloyDB AI Operators are exposed as SQL Tools to the MCP Toolbox.
-- The ADK Agent queries the MCP Toolbox via the "Model Context Protocol".
-- The ADK Agent serves the Vibe-Coded Web UI, hosted on Cloud Run.
-The entire diagram features glossy 3D icons, clean architectural paths, glowing labels, and a premium digital technology presentation finish. No device frames.
+A clean, minimalist, high-resolution system architecture diagram for the Track 7 Guest Assistant. The design style matches the dark mode and glowing neon line aesthetic of the reference poster, but is significantly simplified to focus on clear architectural blocks. The background is a solid very dark gray/black canvas, completely free of busy background grids or digital clutter. The diagram features a simple, linear, easy-to-read layout showing exactly five glowing blocks in a clear flow:
+1. "BigQuery" (Database icon with a subtle blue neon glow)
+2. "AlloyDB" (Database icon with a warm orange neon glow)
+3. "MCP Toolbox" (API/connector icon with a soft gold neon glow)
+4. "ADK Agent" (Brain/AI icon with a bright cyan neon glow)
+5. "Web App on Cloud Run" (Web browser and cloud server icon with an electric purple neon glow)
+
+The flow is connected by simple, clean, glowing neon arrows with minimalist labels:
+- Arrow from "BigQuery" to "AlloyDB" labeled "BigQuery FDW"
+- Arrow from "AlloyDB" to "MCP Toolbox" labeled "Exposed SQL Tools"
+- Double-ended arrow between "MCP Toolbox" and "ADK Agent" labeled "Model Context Protocol"
+- Double-ended arrow between "ADK Agent" and "Web App on Cloud Run" labeled "App API"
+
+The entire graphic has a high-end, uncluttered, professional 2D vector infographic aesthetic, with clean typography, sharp labels, and soft neon outlines. No redundant text or duplicate icons. No device frames.
