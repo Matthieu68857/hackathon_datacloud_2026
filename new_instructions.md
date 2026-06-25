@@ -1,23 +1,4 @@
----
-id: hackathon-challenge-lab-2026
-source: google-agentic-data-cloud-hackathon
-duration: 240
-keywords: docType:Codelab,product:AlloyDbForPostgresql,product:Bigquery,product:Datastream,product:VertexAi,product:BigQueryML,product:AgentDevelopmentKit,product:ModelContextProtocol
----
-
-# Disneyland Agentic Data Cloud Hackathon (3rd Edition)
-
-## 🏰 From Park Analytics to Real-Time Guest Assistance 🏰
-
-| **Summary** | In this Hackathon, you will build the next-generation intelligent backend and real-time guest assistant for Disneyland. You'll load operational data into **AlloyDB**, replicate it in near real-time to **BigQuery** using the new **one-click Datastream** setup, and run predictive ML models for review analysis and wait-time forecasting. You'll build a **Property Graph** in BigQuery to map visitor movements and set up an internal **Conversational Analytics** engine for park managers. Crucially, you will build a dedicated **Database Agentic Layer** (Track 2) using **QueryData**, **BigQuery FDW**, and **MCP Toolbox** to expose AlloyDB operational and analytical capabilities as secure tools. To simplify security and credentials, the final **ADK guest assistant agent will only query AlloyDB**, pulling BigQuery insights transparently via the FDW bridge. Finally, you will focus purely on building the guest assistant using the **Agent Development Kit (ADK)**, vibe-coding a premium web app, and deploying it to **Cloud Run** (Track 7). |
-| --- | --- |
-| **Categories** | docType:Codelab, product:AlloyDB, product:BigQuery, product:VertexAI, product:AgentDevelopmentKit, product:CloudRun |
-| **Duration** | 240 minutes (4 hours) |
-| **Author** | Google Cloud Agentic Data Team |
-| **Layout** | scrolling |
-| **Robots** | noindex |
-
----
+# Disneyland Agentic Data Cloud gHack
 
 ## Introduction
 
@@ -25,119 +6,39 @@ Welcome, Disney Data Wizards! 🪄
 
 Planning the perfect Disneyland trip is a complex optimization problem. Visitors want to maximize magic and minimize waiting. They want to know: *Which rides are best suited for them? When are the crowds thinnest? What is the optimal route through the park to avoid bottleneck queues?*
 
-In this hackathon, your mission is to transform raw data—visitor reviews, attraction catalogs, historical wait times, park brochures, and visitor movement logs—into an end-to-end, intelligent guest assistance system.
+In this gHack, your mission is to transform raw data—visitor reviews, attraction catalogs, historical wait times, park brochures, and visitor movement logs—into an end-to-end, intelligent guest assistance system.
 
-This hackathon is designed to be highly challenging and is structured into **7 tracks** that can be parallelized across different team personas to optimize development speed:
-*   **DBAs & Data Engineers** will build the high-performance operational database in AlloyDB (Track 1) and establish real-time replication.
-*   **Database & App Developers** can immediately build the entire Database Agentic Layer (Track 2) using **QueryData**, **BigQuery FDW**, and **MCP Toolbox** right after the database is populated.
-*   **Data Scientists** will build predictive models, sentiment analysers, and clustering models in BigQuery Studio (Track 3).
-*   **AI Developers** will construct RAG pipelines and multimodal image classifiers in BigQuery (Track 4).
-*   **Graph Specialists** will model and query visitor movement patterns using property graphs in BigQuery (Track 5).
-*   **Data Analysts** will design semantic layers and Conversational Analytics tools for park managers (Track 6).
-*   **Full-Stack AI Developers** will assemble the final track (Track 7) to build the real-time ADK agent, vibe-code the frontend UI, and push the entire solution to **Cloud Run**.
+This gHack is designed to be highly challenging and is structured into **7 tracks** that can be parallelized across **3 key team personas** to optimize development speed:
+*   **DB & Platform Engineers** will build the operational database in AlloyDB, configure Datastream replication, set up the database agentic layer (MCP Toolbox), and assemble the final ADK agent and web UI on Cloud Run (Tracks 1, 2, and 7).
+*   **Data Scientists & Analysts** will train predictive models, perform sentiment analysis, cluster attractions in BigQuery, and design the semantic layer/Conversational Analytics agent for park managers (Tracks 3 and 6).
+*   **AI & Graph Engineers** will construct RAG pipelines, classify multimodal images, and model/query visitor movement patterns using property graphs in BigQuery (Tracks 4 and 5).
 
 Get ready to build an agentic data pipeline that would make Mickey proud! Let the magic begin! ✨
 
----
-
-## Hackathon Architecture Overview
-
-Below is the end-to-end flow of the agentic data architecture you will build today:
-
-```mermaid
-graph TD
-    subgraph Operational Layer [AlloyDB - Operational & Agentic serving]
-        ADB[(AlloyDB)]
-        FDW[BigQuery FDW]
-        AIOP[AlloyDB AI Operators]
-        QD[QueryData Context]
-    end
-
-    subgraph Streaming [Real-Time Replication]
-        DS[Datastream <br>One-Click CDC]
-    end
-
-    subgraph Analytical Layer [BigQuery - Storage & Analytical Processing]
-        BQ[(BigQuery Data Warehouse)]
-        BQML[BigQuery ML / TimesFM]
-        Graph[BigQuery Property Graph]
-        RAG[BQ Object Tables + RAG]
-        CA[Conversational Analytics Agent]
-    end
-
-    subgraph Agentic Layer [AI Agent & Serving]
-        MCP[MCP Toolbox Server]
-        ADK[Agent Development Kit ADK]
-        UI[Vibe-Coded Web App]
-        CR[Cloud Run]
-    end
-
-    %% Data Flows
-    ADB -->|CDC| DS
-    DS -->|Ingest| BQ
-    BQ -->|Analytical Queries / ML| BQML
-    BQ -->|Movement Logs| Graph
-    BQ -->|Brochures & Photos| RAG
-    BQ -->|Semantic Layer| CA
-    
-    %% Bridge
-    BQML -->|Forecasts| FDW
-    Graph -->|Routing Tables| FDW
-    FDW -->|Query BigQuery| ADB
-    
-    %% Agentic Flow
-    ADB -->|AI Operators & Hybrid Search| AIOP
-    QD -->|Natural Language to SQL| AIOP
-    AIOP -->|Expose SQL Tools| MCP
-    MCP -->|Expose MCP Tools| ADK
-    ADK -->|Real-time Guides| UI
-    UI -->|Deploy| CR
-```
-
----
 
 ## 👥 Team Roles & Parallelization Paths
 
-This hackathon is designed to be highly challenging but is **fully parallelizable** across different team members. Whether you are a team of 2, 3, or more, you can split the tracks to build in parallel and assemble a complete intelligent system in under 4 hours.
+This gHack is designed to be highly challenging but is **fully parallelizable** across different team members. Whether you are a team of 2, 3, or more, you can split the tracks to build in parallel and assemble a complete intelligent system in under 4 hours.
 
 ### 📊 Recommended Parallelization Options
 
 Here is how you can divide and conquer based on your team size:
 
-```mermaid
-gantt
-    title 3-Group Parallelization Timeline (4 Hours)
-    dateFormat  X
-    axisFormat %H:%M
-    
-    section Group A: DB & Platform
-    Track 1: AlloyDB & Datastream Setup :active, a1, 0, 45
-    Track 2: BQ FDW & MCP Toolbox Setup   :active, a2, 45, 105
-    Track 7: ADK Agent, Web UI & Cloud Run :active, a3, 105, 195
-    
-    section Group B: Data Science
-    Track 3: Sentiment, Forecasting, Clustering :active, b1, 0, 90
-    Support & Integration / Track 6           :active, b2, 90, 120
-    
-    section Group C: AI & Graphs
-    Track 4: Multimodal & RAG Analytics        :active, c1, 0, 45
-    Track 5: Property Graph & Routing Table     :active, c2, 45, 90
-    Track 6: Conversational Analytics Agent    :active, c3, 90, 120
-```
+![3-Group Parallelization Timeline](images/parallelization_timeline.png)
 
 #### 🧩 Option 1: The 3-Group Split (Recommended)
 *   **Group A (Platform & DB Engineers):** Focuses on the core transactional and serving loop.
-    *   *Path:* [Track 1](file:///Users/cornillon/Documents/git/hackathon_datacloud_2026/new_instructions.md#track-1-data-foundation-operational-to-analytical) -> [Track 2](file:///Users/cornillon/Documents/git/hackathon_datacloud_2026/new_instructions.md#track-2-exposing-alloydb-via-querydata-mcp-toolbox-database-agentic-layer) -> [Track 7](file:///Users/cornillon/Documents/git/hackathon_datacloud_2026/new_instructions.md#track-7-building-the-real-time-guest-assistant)
+    *   *Path:* [Track 1](file:///Users/cornillon/Documents/git/gHack_datacloud_2026/new_instructions.md#track-1-data-foundation-operational-to-analytical) -> [Track 2](file:///Users/cornillon/Documents/git/gHack_datacloud_2026/new_instructions.md#track-2-exposing-alloydb-via-querydata-mcp-toolbox-database-agentic-layer) -> [Track 7](file:///Users/cornillon/Documents/git/gHack_datacloud_2026/new_instructions.md#track-7-building-the-real-time-guest-assistant)
 *   **Group B (Data Scientists):** Focuses on analytics, forecasting, and clustering.
-    *   *Path:* [Track 3](file:///Users/cornillon/Documents/git/hackathon_datacloud_2026/new_instructions.md#track-3-data-science-ml-predictive-sentiment) -> Assist Group C with [Track 6](file:///Users/cornillon/Documents/git/hackathon_datacloud_2026/new_instructions.md#track-6-conversational-analytics-the-internal-ai-analyst) or Group A with [Track 7](file:///Users/cornillon/Documents/git/hackathon_datacloud_2026/new_instructions.md#track-7-building-the-real-time-guest-assistant)
+    *   *Path:* [Track 3](file:///Users/cornillon/Documents/git/gHack_datacloud_2026/new_instructions.md#track-3-data-science-ml-predictive-sentiment) -> Assist Group C with [Track 6](file:///Users/cornillon/Documents/git/gHack_datacloud_2026/new_instructions.md#track-6-conversational-analytics-the-internal-ai-analyst) or Group A with [Track 7](file:///Users/cornillon/Documents/git/gHack_datacloud_2026/new_instructions.md#track-7-building-the-real-time-guest-assistant)
 *   **Group C (AI & Graph Engineers):** Focuses on unstructured data, graphs, and internal conversational search.
-    *   *Path:* [Track 4](file:///Users/cornillon/Documents/git/hackathon_datacloud_2026/new_instructions.md#track-4-multimodal-rag-analytics) -> [Track 5](file:///Users/cornillon/Documents/git/hackathon_datacloud_2026/new_instructions.md#track-5-graph-analytics-visitor-movement) -> [Track 6](file:///Users/cornillon/Documents/git/hackathon_datacloud_2026/new_instructions.md#track-6-conversational-analytics-the-internal-ai-analyst)
+    *   *Path:* [Track 4](file:///Users/cornillon/Documents/git/gHack_datacloud_2026/new_instructions.md#track-4-multimodal-rag-analytics) -> [Track 5](file:///Users/cornillon/Documents/git/gHack_datacloud_2026/new_instructions.md#track-5-graph-analytics-visitor-movement) -> [Track 6](file:///Users/cornillon/Documents/git/gHack_datacloud_2026/new_instructions.md#track-6-conversational-analytics-the-internal-ai-analyst)
 
 #### 👥 Option 2: The 2-Group Split
 *   **Group A (Database & Application Developers):** Focuses on database setup, agentic tool serving, and app integration.
-    *   *Path:* [Track 1](file:///Users/cornillon/Documents/git/hackathon_datacloud_2026/new_instructions.md#track-1-data-foundation-operational-to-analytical) -> [Track 2](file:///Users/cornillon/Documents/git/hackathon_datacloud_2026/new_instructions.md#track-2-exposing-alloydb-via-querydata-mcp-toolbox-database-agentic-layer) -> [Track 7](file:///Users/cornillon/Documents/git/hackathon_datacloud_2026/new_instructions.md#track-7-building-the-real-time-guest-assistant)
+    *   *Path:* [Track 1](file:///Users/cornillon/Documents/git/gHack_datacloud_2026/new_instructions.md#track-1-data-foundation-operational-to-analytical) -> [Track 2](file:///Users/cornillon/Documents/git/gHack_datacloud_2026/new_instructions.md#track-2-exposing-alloydb-via-querydata-mcp-toolbox-database-agentic-layer) -> [Track 7](file:///Users/cornillon/Documents/git/gHack_datacloud_2026/new_instructions.md#track-7-building-the-real-time-guest-assistant)
 *   **Group B (AI, ML & Analytics Engineers):** Focuses on all BigQuery-centric analytics, ML models, RAG, and property graphs.
-    *   *Path:* [Track 4](file:///Users/cornillon/Documents/git/hackathon_datacloud_2026/new_instructions.md#track-4-multimodal-rag-analytics) -> [Track 3](file:///Users/cornillon/Documents/git/hackathon_datacloud_2026/new_instructions.md#track-3-data-science-ml-predictive-sentiment) -> [Track 5](file:///Users/cornillon/Documents/git/hackathon_datacloud_2026/new_instructions.md#track-5-graph-analytics-visitor-movement) -> [Track 6](file:///Users/cornillon/Documents/git/hackathon_datacloud_2026/new_instructions.md#track-6-conversational-analytics-the-internal-ai-analyst)
+    *   *Path:* [Track 4](file:///Users/cornillon/Documents/git/gHack_datacloud_2026/new_instructions.md#track-4-multimodal-rag-analytics) -> [Track 3](file:///Users/cornillon/Documents/git/gHack_datacloud_2026/new_instructions.md#track-3-data-science-ml-predictive-sentiment) -> [Track 5](file:///Users/cornillon/Documents/git/gHack_datacloud_2026/new_instructions.md#track-5-graph-analytics-visitor-movement) -> [Track 6](file:///Users/cornillon/Documents/git/gHack_datacloud_2026/new_instructions.md#track-6-conversational-analytics-the-internal-ai-analyst)
 
 ---
 
@@ -146,7 +47,7 @@ gantt
 To prevent teams from blocking each other, utilize these coordination strategies:
 
 1.  **Zero-Delay BigQuery ML & Graph Analytics (Bypass Track 1):**
-    Group B and C do not need to wait for Group A's Datastream replication to be active. They can immediately load the raw CSV files (`reviews.csv`, `attractions.csv`, `visitor_movements.csv`, and `waiting_times.csv`) from Cloud Storage directly into BigQuery at the very beginning of the hackathon to start training their models and building graphs.
+    Group B and C do not need to wait for Group A's Datastream replication to be active. They can immediately load the raw CSV files (`reviews.csv`, `attractions.csv`, `visitor_movements.csv`, and `waiting_times.csv`) from Cloud Storage directly into BigQuery at the very beginning of the gHack to start training their models and building graphs.
 2.  **Instant FDW Mapping (Bypass Track 3 & 5):**
     Group A does not need to wait for Group B and C to complete their models to configure the BigQuery FDW in AlloyDB. At the start of Track 2, Group A can simply execute the following SQL commands in BigQuery to create empty placeholder tables. This allows the FDW mapping and the MCP server setup to succeed immediately:
     ```sql
@@ -199,8 +100,8 @@ Connect using **AlloyDB Studio** or `psql` and perform the following tasks:
     ```
 3.  **Import Data from Cloud Storage:**
     Use the AlloyDB Import API (via UI or `gcloud`) or the tool of your choice to import the data from these public CSVs:
-    *   `gs://hackathon_data_disneyland_<YOUR_PROJECT_3DIGITS>/reviews.csv` into `disneyland_reviews`
-    *   `gs://hackathon_data_disneyland_<YOUR_PROJECT_3DIGITS>/attractions.csv` into `disneyland_attractions`
+    *   `gs://gHack_data_disneyland_<YOUR_PROJECT_3DIGITS>/reviews.csv` into `disneyland_reviews`
+    *   `gs://gHack_data_disneyland_<YOUR_PROJECT_3DIGITS>/attractions.csv` into `disneyland_attractions`
 
 ### 1.2 Generate Vector Embeddings at the Source
 
@@ -219,22 +120,15 @@ To support semantic searches on our attractions, we need to generate and store v
 3.  **Generate Embeddings:**
     Populate the `embedding` column by calling Vertex AI's embedding model natively from SQL:
     ```sql
-    UPDATE disneyland_attractions
-    SET embedding = google_ml.embedding('gemini-embedding-001', description);
+    -- TODO: Write an UPDATE query that populates the `embedding` column by calling 
+    -- Vertex AI's embedding model natively from SQL using the 'gemini-embedding-001' model.
     ```
 
 ### 1.3 Set Up Real-Time Replication with One-Click Datastream
 
-To stream our data from AlloyDB to BigQuery in near real-time, we will use **Google Datastream**.
+To stream our data from AlloyDB to BigQuery in near real-time, we will use **Google Datastream** via the **One-Click Datastream Integration**.
 
-1.  **Configure Logical Replication on AlloyDB:**
-    Run the following queries one-by-one to prepare AlloyDB for CDC (Change Data Capture):
-    ```sql
-    CREATE PUBLICATION pub_disney FOR TABLE disneyland_reviews, disneyland_attractions;
-    ALTER USER postgres WITH REPLICATION;
-    SELECT PG_CREATE_LOGICAL_REPLICATION_SLOT('slot_disney', 'pgoutput');
-    ```
-2.  **Create the Stream (One-Click Setup):**
+1.  **Create the Stream (One-Click Setup):**
     *   In the Google Cloud Console, navigate to **AlloyDB > Clusters**.
     *   Select your cluster, and look for the **Replicate to BigQuery** or **One-Click Datastream Integration** option.
     *   Follow the guided wizard. It will automatically detect your publication and replication slot, create the source profile, the destination profile, and start the stream.
@@ -280,98 +174,76 @@ Instead of setting up an active replication pipeline going backward (Reverse-ETL
     *   In the Google Cloud Console (IAM page), grant this service account the following roles:
         *   **BigQuery Data Viewer** (`roles/bigquery.dataViewer`)
         *   **BigQuery Read Session User** (`roles/bigquery.readSessionUser`)
+> [!TIP]
+> **Recommendation:** Use the built-in SQL query editor and database schema explorer interface in **AlloyDB Studio** to run these configuration steps and verify that your foreign tables are correctly mapped in the schema tree.
+
 2.  **Configure FDW in AlloyDB:**
-    Connect to your `postgres` database in AlloyDB Studio and run:
-    ```sql
-    CREATE EXTENSION IF NOT EXISTS bigquery_fdw;
-    
-    CREATE SERVER bq_disney_server FOREIGN DATA WRAPPER bigquery_fdw;
-    
-    CREATE USER MAPPING FOR postgres SERVER bq_disney_server;
-    ```
+    Connect to your `postgres` database in AlloyDB Studio. Create the `bigquery_fdw` extension, establish a foreign server named `bq_disney_server` utilizing the wrapper, and create a user mapping for the `postgres` user. 
+    *(Refer to the Solutions Reference for the required DDL statements).*
 3.  **Map the BigQuery Tables as Foreign Tables:**
     Create foreign tables in AlloyDB mapped directly to your analytical tables in BigQuery:
-    ```sql
-    CREATE FOREIGN TABLE bq_forecasted_waiting_times (
-        attraction_id int,
-        forecasted_timestamp timestamp,
-        predicted_wait_time numeric
-    ) SERVER bq_disney_server OPTIONS (
-        project '[YOUR_PROJECT_ID]',
-        dataset 'disney',
-        table 'forecasted_waiting_times'
-    );
-
-    CREATE FOREIGN TABLE bq_graph_recommendations (
-        attraction_id int,
-        recommended_next_attraction_id int,
-        congestion_level text
-    ) SERVER bq_disney_server OPTIONS (
-        project '[YOUR_PROJECT_ID]',
-        dataset 'disney',
-        table 'graph_recommendations'
-    );
-    ```
+    *   **`bq_forecasted_waiting_times`**: Mapped to the BigQuery table `disney.forecasted_waiting_times` (columns: `attraction_id` int, `forecasted_timestamp` timestamp, `predicted_wait_time` numeric).
+    *   **`bq_graph_recommendations`**: Mapped to the BigQuery table `disney.graph_recommendations` (columns: `attraction_id` int, `recommended_next_attraction_id` int, `congestion_level` text).
 
 ### 2.2 Set Up the QueryData Context Set in AlloyDB
 
 To bring predictability and eliminate SQL hallucinations, you will configure **QueryData** templates. This maps common natural language questions about attractions and reviews to strict SQL structures.
 
 1.  **Create the JSON Context Set File:**
-    Create a file named `querydata_disney_context.json` on your local system:
+    Create a file named `querydata_disney_context.json` on your local system. Fill in the SQL templates and queries according to the requirements:
     ```json
     {
       "templates": [
         {
           "nlQuery": "Show available attractions in Disneyland Paris",
-          "sql": "SELECT name, description FROM public.disneyland_attractions WHERE branch = 'Disneyland Paris'",
+          "sql": "/* TODO: Write SQL to select name, description from public.disneyland_attractions filtered by branch */",
           "intent": "List all attractions for a specific park branch",
           "manifest": "List attractions by branch",
           "parameterized": {
             "parameterized_intent": "Show available attractions in $1",
-            "parameterized_sql": "SELECT name, description FROM public.disneyland_attractions WHERE branch = $1"
+            "parameterized_sql": "/* TODO: Write the parameterized SQL using $1 */"
           }
         },
         {
           "nlQuery": "Find reviews with rating 5 for Space Mountain",
-          "sql": "SELECT r.review_id, r.rating, r.review_text FROM public.disneyland_reviews r INNER JOIN public.disneyland_attractions a ON r.branch = a.branch WHERE a.name = 'Space Mountain' AND r.rating = 5",
+          "sql": "/* TODO: Write SQL to join reviews and attractions on branch, filtered by attraction name and rating */",
           "intent": "Get reviews with a specific rating for a named attraction",
           "manifest": "Get reviews by attraction and rating",
           "parameterized": {
             "parameterized_intent": "Find reviews with rating $2 for $1",
-            "parameterized_sql": "SELECT r.review_id, r.rating, r.review_text FROM public.disneyland_reviews r INNER JOIN public.disneyland_attractions a ON r.branch = a.branch WHERE a.name = $1 AND r.rating = $2"
+            "parameterized_sql": "/* TODO: Write the parameterized SQL using $1 (name) and $2 (rating) */"
           }
         },
         {
           "nlQuery": "Average rating of attractions in California Adventure",
-          "sql": "SELECT AVG(rating) FROM public.disneyland_reviews WHERE branch = 'California Adventure'",
+          "sql": "/* TODO: Write SQL to select the average rating from public.disneyland_reviews filtered by branch */",
           "intent": "Calculate the average review rating for a specific branch",
           "manifest": "Average rating by branch",
           "parameterized": {
             "parameterized_intent": "Average rating of attractions in $1",
-            "parameterized_sql": "SELECT AVG(rating) FROM public.disneyland_reviews WHERE branch = $1"
+            "parameterized_sql": "/* TODO: Write the parameterized SQL using $1 */"
           }
         }
       ],
       "facets": [
         {
-          "sql_snippet": "r.rating >= 4",
+          "sql_snippet": "/* TODO: Write SQL snippet to filter rating >= 4 */",
           "intent": "highly rated reviews",
           "manifest": "Filter reviews by a minimum rating threshold",
           "parameterized": {
             "parameterized_intent": "reviews with rating greater than or equal to $1",
-            "parameterized_sql_snippet": "r.rating >= $1"
+            "parameterized_sql_snippet": "/* TODO: Write the parameterized SQL snippet using $1 */"
           }
         }
       ],
       "value_searches": [
         {
-          "query": "SELECT DISTINCT T.name as value, 'public.disneyland_attractions.name' as columns, 'Attraction Name' as concept_type, 0 as distance, '{}'::text as context FROM public.disneyland_attractions T WHERE T.name ILIKE $value",
+          "query": "/* TODO: Write value search SQL query for public.disneyland_attractions.name (ILIKE $value) */",
           "concept_type": "Attraction Name",
           "description": "Search for attraction names"
         },
         {
-          "query": "SELECT DISTINCT T.branch as value, 'public.disneyland_attractions.branch' as columns, 'Branch Name' as concept_type, 0 as distance, '{}'::text as context FROM public.disneyland_attractions T WHERE T.branch ILIKE $value",
+          "query": "/* TODO: Write value search SQL query for public.disneyland_attractions.branch (ILIKE $value) */",
           "concept_type": "Branch Name",
           "description": "Search for park branches"
         }
@@ -407,9 +279,7 @@ You will prepare SQL queries that leverage AlloyDB's advanced AI features (vecto
       SELECT name, description 
       FROM disneyland_attractions 
       WHERE attraction_id <= max_id
-        AND google_ml.if(
-          prompt => prompt_text || ' Description: ' || description
-        );
+        AND /* TODO: Add the google_ml.if operator logic here to filter descriptions semantically based on prompt_text */;
     $$ LANGUAGE SQL;
     ```
 
@@ -428,7 +298,7 @@ You will now expose all these database capabilities (both operational tables and
     Create a `tools.yaml` file outlining all the operational and analytical tools:
     ```yaml
     kind: source
-    name: disneyland-db
+    name: disney-db
     type: alloydb-postgres
     project: "[YOUR_PROJECT_ID]"
     region: "europe-west1"
@@ -443,7 +313,7 @@ You will now expose all these database capabilities (both operational tables and
     kind: tool
     name: search_attractions_hybrid
     type: postgres-sql
-    source: disneyland-db
+    source: disney-db
     description: "Performs a high-performance hybrid (vector + keyword) search on park attractions based on user interests."
     parameters:
       - name: vector_query
@@ -453,38 +323,15 @@ You will now expose all these database capabilities (both operational tables and
         type: string
         description: "Keyword search term (e.g., 'Space Mountain')"
     statement: |
-      SET google_ml_integration.enable_preview_ai_functions = true;
-      SELECT a.name, a.description, search_results.score
-      FROM disneyland_attractions a
-      JOIN ai.hybrid_search(
-        search_inputs => ARRAY[
-            $$ {
-              "data_type": "vector",
-              "table_name": "disneyland_attractions",
-              "key_column": "attraction_id",
-              "vec_column": "embedding",
-              "distance_operator": "public.<=>",
-              "limit": 5,
-              "query_vector": "ai.embedding('gemini-embedding-001', $1)::vector"
-            } $$::JSONB,
-            $$ {
-              "data_type": "text",
-              "table_name": "disneyland_attractions",
-              "key_column": "attraction_id",
-              "text_column": "description_tsvector",
-              "limit": 5,
-              "ranking_function": "<=>",
-              "query_text_input": $2
-            } $$::JSONB
-        ],
-        id_type => NULL::BIGINT
-      ) AS search_results ON a.attraction_id = search_results.id;
+      -- TODO: Write the hybrid search query utilizing AlloyDB's ai.hybrid_search operator, 
+      -- combining the vector cosine similarity index and the full-text search index.
+      -- (Hint: Pass the vector query embedded via google_ml.embedding)
     ---
     # Tool 2: Semantic Filtering using AlloyDB AI operator (ai.if)
     kind: tool
     name: semantic_ride_filter
     type: postgres-sql
-    source: disneyland-db
+    source: disney-db
     description: "Filters attractions semantically based on a natural language safety or suitability prompt (e.g., 'suitable for pregnant women')."
     parameters:
       - name: prompt_text
@@ -492,13 +339,13 @@ You will now expose all these database capabilities (both operational tables and
       - name: max_id
         type: integer
     statement: |
-      SELECT * FROM filter_attractions_semantically($1, $2);
+      -- TODO: Call your filter_attractions_semantically function with the appropriate parameters
     ---
     # Tool 3: Transactional Tool to record new reviews
     kind: tool
     name: add_attraction_review
     type: postgres-sql
-    source: disneyland-db
+    source: disney-db
     description: "Saves a new customer review for an attraction into the operational database."
     parameters:
       - name: rating
@@ -508,38 +355,32 @@ You will now expose all these database capabilities (both operational tables and
       - name: branch
         type: string
     statement: |
-      INSERT INTO public.disneyland_reviews (review_id, rating, review_text, branch, year_month)
-      VALUES ((SELECT COALESCE(MAX(review_id), 0) + 1 FROM public.disneyland_reviews), $1, $2, $3, TO_CHAR(CURRENT_DATE, 'YYYY-MM'))
-      RETURNING review_id, rating, branch;
+      -- TODO: Write an INSERT statement that records a new review into the disneyland_reviews table.
+      -- Ensure review_id is auto-incremented and the current date is formatted correctly.
     ---
     # Tool 4: Analytical Tool checking Wait Time Forecasts from FDW
     kind: tool
     name: get_wait_time_forecast
     type: postgres-sql
-    source: disneyland-db
+    source: disney-db
     description: "Queries BigQuery FDW to get forecasted wait times for a specific attraction."
     parameters:
       - name: attraction_id
         type: integer
     statement: |
-      SELECT predicted_wait_time 
-      FROM bq_forecasted_waiting_times 
-      WHERE attraction_id = $1 
-      ORDER BY forecasted_timestamp ASC LIMIT 1;
+      -- TODO: Query the FDW foreign table bq_forecasted_waiting_times for the attraction's predicted wait time
     ---
     # Tool 5: Analytical Tool checking Graph Recommendations from FDW
     kind: tool
     name: get_next_ride_recommendation
     type: postgres-sql
-    source: disneyland-db
+    source: disney-db
     description: "Gets graph-based next-ride routing recommendations for a guest leaving a specific attraction to avoid queues."
     parameters:
       - name: attraction_id
         type: integer
     statement: |
-      SELECT recommended_next_attraction_id, congestion_level 
-      FROM bq_graph_recommendations 
-      WHERE attraction_id = $1;
+      -- TODO: Query the FDW foreign table bq_graph_recommendations to retrieve recommendations
     ---
     kind: toolset
     name: disneyland_operational_tools
@@ -587,7 +428,7 @@ Rather than writing Python code from scratch, you will leverage the new **Data S
 We want our guest assistant to predict wait times for any hour of the day.
 
 1.  Load the historical wait times dataset from:
-    `gs://hackathon_data_disneyland_<YOUR_PROJECT_3DIGITS>/waiting_times.csv` into a BigQuery table named `waiting_times`.
+    `gs://gHack_data_disneyland_<YOUR_PROJECT_3DIGITS>/waiting_times.csv` into a BigQuery table named `waiting_times`.
 2.  Use BigQuery ML to train a time-series forecasting model. You can choose either:
     *   **ARIMA_PLUS**: The classic, fast statistical forecasting model.
     *   **TimesFM**: Google's state-of-the-art foundation model for time-series forecasting (using `AI.FORECAST`).
@@ -621,7 +462,7 @@ Disneyland managers have a collection of visitor photos and PDF brochures. We wa
 
 ### 4.1 Multimodal Image Classification
 
-You have a GCS bucket containing park photos: `gs://hackathon_data_disneyland_<YOUR_PROJECT_3DIGITS>/attraction_parc_photos/`.
+You have a GCS bucket containing park photos: `gs://gHack_data_disneyland_<YOUR_PROJECT_3DIGITS>/attraction_parc_photos/`.
 
 1.  Create a **BigQuery Object Table** pointing to the GCS bucket.
 2.  Create a remote model in BigQuery pointing to a multimodal model (e.g., `gemini-2.5-flash`).
@@ -630,7 +471,7 @@ You have a GCS bucket containing park photos: `gs://hackathon_data_disneyland_<Y
 
 ### 4.2 PDF Brochure Ingestion & RAG Pipeline
 
-We want our assistant to answer detailed questions based on the official park brochures (PDFs) located in `gs://hackathon_data_disneyland_<YOUR_PROJECT_3DIGITS>/disneyland_brochures/`.
+We want our assistant to answer detailed questions based on the official park brochures (PDFs) located in `gs://gHack_data_disneyland_<YOUR_PROJECT_3DIGITS>/disneyland_brochures/`.
 
 1.  Create an **Object Table** pointing to the brochures bucket.
 2.  Create a **Python UDF** in BigQuery to extract text and chunk the PDF files. You can use `pypdf` inside the UDF environment.
@@ -659,7 +500,7 @@ To recommend the best paths for visitors to avoid crowds, we must understand how
 ### 5.1 Ingest Visitor Movement Data
 
 1.  Load the visitor movement dataset from:
-    `gs://hackathon_data_disneyland_<YOUR_PROJECT_3DIGITS>/visitor_movements.csv` into a BigQuery table named `visitor_movements` (columns: `visitor_id`, `from_attraction_id`, `to_attraction_id`, `timestamp`).
+    `gs://gHack_data_disneyland_<YOUR_PROJECT_3DIGITS>/visitor_movements.csv` into a BigQuery table named `visitor_movements` (columns: `visitor_id`, `from_attraction_id`, `to_attraction_id`, `timestamp`).
 
 ### 5.2 Build a Property Graph in BigQuery
 
@@ -776,27 +617,19 @@ Using the **Agent Development Kit (ADK)**, you will construct the conversational
     from toolbox_core import ToolboxSyncClient
 
     # 1. Connect to the MCP server running on port 5000
-    toolbox = ToolboxSyncClient("http://127.0.0.1:5000")
+    # TODO: Initialize the ToolboxSyncClient pointing to your local MCP server
+    toolbox = ...
     
     # 2. Load all tools (operational + analytical)
-    disney_tools = toolbox.load_toolset('disneyland_operational_tools')
+    # TODO: Load the 'disneyland_operational_tools' toolset from the MCP client
+    disney_tools = ...
 
     # 3. Define the Guest Guide Agent
+    # TODO: Configure your Agent named 'disney_guide_agent'. Use the 'gemini-2.5-flash' model,
+    # write a rich, magical system instruction guiding the assistant on its persona and tool usage,
+    # and link the loaded tools to the agent.
     visitor_guide = Agent(
-        name='disney_guide_agent',
-        model="gemini-2.5-flash",
-        description='A helpful, friendly guide for Disneyland visitors.',
-        instruction="""
-        You are a friendly Disneyland Guest Assistant. Your goal is to help visitors plan their day.
-        Use the tools at your disposal to:
-        - Search for attractions (using hybrid search) or filter them semantically.
-        - Check forecasted wait times for attractions.
-        - Recommend the next ride to avoid queues based on graph recommendations.
-        - Add customer reviews if they want to review a ride.
-        
-        Always maintain a magical, helpful, and friendly tone.
-        """,
-        tools=disney_tools,
+        ...
     )
     ```
 
@@ -817,7 +650,7 @@ Rather than a generic, plain interface, you will **vibe-code a stunning, premium
 
 ### 7.3 Deploy to Google Cloud Run
 
-To complete the hackathon and make the guest assistant publicly accessible, you will containerize and push the application to **Cloud Run**.
+To complete the gHack and make the guest assistant publicly accessible, you will containerize and push the application to **Cloud Run**.
 
 1.  **Write the Dockerfile:**
     Create a `Dockerfile` that packages both the ADK python backend (exposing the agent API) and the built frontend assets.
@@ -838,5 +671,5 @@ To complete the hackathon and make the guest assistant publicly accessible, you 
 > *   A full conversation demonstration in your application UI where the agent uses hybrid search, checks wait times, recommends a next-ride, and records a review—all working flawlessly in one session.
 
 ---
-**Congratulations! You have completed the Disneyland Agentic Data Cloud Hackathon! 🏆**
+**Congratulations! You have completed the Disneyland Agentic Data Cloud gHack! 🏆**
 You have built a state-of-the-art, end-to-end agentic data pipeline on Google Cloud. Have a magical day! 🪄✨

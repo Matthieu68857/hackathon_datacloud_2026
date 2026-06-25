@@ -1,0 +1,5 @@
+A premium, high-resolution infographic showing a 3-Group Parallelization Timeline for a 4-hour hackathon. The design style, color scheme, and dark glowing background exactly match the reference poster. The background is a very dark blue/black tech canvas with glowing neon circuitry and digital network trails. The infographic displays three distinct, parallel glowing paths (streams) representing the work of three team groups:
+1. "Group A: DB & Platform" as a vibrant glowing orange/red path with nodes labeled "Track 1: AlloyDB", "Track 2: FDW & MCP", and "Track 7: ADK & Web UI".
+2. "Group B: Data Science" as a glowing cyan/blue path with nodes labeled "Track 3: ML & Sentiment" and "Track 6: Analytics".
+3. "Group C: AI & Graphs" as a glowing green path with nodes labeled "Track 4: RAG & Multimodal", "Track 5: Property Graphs", and "Track 6: Conversational Agent".
+At the top, the title "3-GROUP PARALLELIZATION TIMELINE (4 HOURS)" is written in a sleek, modern, professional font. The entire graphic features glowing neon nodes, glossy glassmorphism badges, and a premium digital technology aesthetic. No device frames.
