@@ -1,9 +1,25 @@
-A premium, high-resolution introductory infographic poster illustrating the 7-Track Architecture of the Disneyland Agentic Data Cloud gHack. The design style, dark theme, glowing neon lines, and modern typography must exactly match the reference poster. The background is a very dark, polished blue/black canvas filled with glowing tech circuit patterns and digital network nodes. At the top, the title "DISNEYLAND AGENTIC DATA CLOUD gHACK" is displayed in a sleek, glowing corporate font, with the subtitle "7-TRACK END-TO-END ARCHITECTURE". The poster displays 7 distinct glowing circular track nodes, connected by winding neon paths in orange, cyan, green, and purple, representing:
-1. "Track 1: Data Foundation (CDC)" - AlloyDB operational tables, CDC Datastream replication, BigQuery. (Orange glow)
-2. "Track 2: Database Agentic Layer" - BigQuery FDW, QueryData context sets, MCP Toolbox. (Gold/Orange glow)
-3. "Track 3: Data Science & ML (BQML)" - Sentiment analysis, ARIMA/TimesFM wait time forecasting, K-Means clustering. (Cyan/Blue glow)
-4. "Track 4: Multimodal & RAG" - BQ Object Tables, Gemini image classification, Vector Search RAG. (Blue/Cyan glow)
-5. "Track 5: SQL Graph Analytics" - Property graphs, visitor movement matching, next-ride routing. (Green glow)
-6. "Track 6: Conversational Analytics" - BigQuery Studio Agents, Semantic Layer, Golden Queries. (Light Green glow)
-7. "Track 7: Guest Assistant App" - ADK Agent, vibe-coded premium Web UI, Google Cloud Run. (Purple/White glow at the convergence point)
-The layout flows beautifully from the operational database (AlloyDB) through the analytical layers (BigQuery) and converges into the final guest assistant application, with glossy glassmorphic details, rich neon halos, and a premium digital tech finish. No device frames.
+A premium, high-resolution introductory infographic poster illustrating the 9-Challenge Architecture of the Disneyland Agentic Data Cloud gHack. The design style, dark theme, glowing neon lines, and modern typography must exactly match the reference poster. The background is a very dark, polished blue/black canvas filled with glowing tech circuit patterns and digital network nodes. At the top, the title "DISNEYLAND AGENTIC DATA CLOUD gHACK" is displayed in a sleek, glowing corporate font, with the subtitle "9-CHALLENGE END-TO-END ARCHITECTURE".
+
+The poster must display exactly 9 distinct, separate glowing circular challenge nodes, organized in a clear 3-column flow from left to right:
+
+1. Left Column (Operational Database - 2 Nodes):
+   - 'Challenge 1: Data Foundation & CDC' - AlloyDB setup, Datastream replication. (Orange glow)
+   - 'Challenge 2: Agentic Database Layer' - QueryData context, hybrid search, semantic filtering. (Gold glow)
+
+2. Middle Column (BigQuery Analytics - 4 Nodes):
+   - 'Challenge 3: Sentiment & Forecasting' - Sentiment analysis, ARIMA/TimesFM wait time forecasting. (Cyan glow)
+   - 'Challenge 4: Multimodal & RAG' - BQ Object Tables, Gemini image classification, Vector Search RAG. (Blue glow)
+   - 'Challenge 5: Graph Analytics & Flow' - Property graphs, visitor movement matching, next-ride routing. (Green glow)
+   - 'Challenge 6: Conversational Analytics' - BigQuery Studio Agents, Semantic Layer, Golden Queries. (Light Green glow)
+
+3. Right Column (Serving & Application - 3 Nodes):
+   - 'Challenge 7: Reverse ETL Sync' - Syncing BigQuery insights back to AlloyDB. (Purple glow)
+   - 'Challenge 8: DB Tools via MCP' - Exposing database tools via MCP Toolbox. (Pink glow)
+   - 'Challenge 9: Guest Assistant App' - ADK Agent, vibe-coded premium Web UI, Google Cloud Run. (White/Bright glow at the convergence point)
+
+Winding neon paths connect the columns:
+- Winding paths flow from the Left Column (AlloyDB) into the Middle Column (BigQuery).
+- Winding paths flow from the Middle Column (BigQuery) into Challenge 7 in the Right Column (representing the sync back to AlloyDB).
+- The flow then goes from Challenge 7 to Challenge 8, and finally converges into Challenge 9.
+
+Ensure all 9 nodes are present, distinct, and correctly labeled with their respective challenge numbers (1 to 9). No device frames. Premium digital tech finish.

@@ -1,6 +1,6 @@
 # Disneyland Agentic Data Cloud
 
-![Disneyland Agentic Data Cloud 7-Track Architecture](images/ghack_7track_architecture.png)
+![Disneyland Agentic Data Cloud 9-Challenge Architecture](images/ghack_9challenge_architecture.jpg)
 
 ## Introduction
 
@@ -71,7 +71,7 @@ This gHack is designed to be highly challenging but is **fully parallelizable** 
 
 Here is how you can divide and conquer based on your team size:
 
-![3-Group Parallelization Timeline](images/parallelization_timeline.png)
+![3-Group Parallelization Timeline](images/parallelization_timeline.jpg)
 
 #### 🧩 Option 1: The 3-Group Split (Recommended)
 *   **Group A (Platform & DB Engineers):** Focuses on the core transactional and serving loop.

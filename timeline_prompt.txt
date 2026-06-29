@@ -1,5 +1,16 @@
-A premium, high-resolution infographic showing a 3-Group Parallelization Timeline for a 4-hour hackathon. The design style, color scheme, and dark glowing background exactly match the reference poster. The background is a very dark blue/black tech canvas with glowing neon circuitry and digital network trails. The infographic displays three distinct, parallel glowing paths (streams) representing the work of three team groups:
-1. "Group A: DB & Platform" as a vibrant glowing orange/red path with nodes labeled "Track 1: AlloyDB", "Track 2: FDW & MCP", and "Track 7: ADK & Web UI".
-2. "Group B: Data Science" as a glowing cyan/blue path with nodes labeled "Track 3: ML & Sentiment" and "Track 6: Analytics".
-3. "Group C: AI & Graphs" as a glowing green path with nodes labeled "Track 4: RAG & Multimodal", "Track 5: Property Graphs", and "Track 6: Conversational Agent".
+A premium, high-resolution infographic showing a 3-Group Parallelization Timeline for a 4-hour hackathon. The design style, color scheme, and dark glowing background must exactly match the reference poster. The background is a very dark blue/black tech canvas with glowing neon circuitry and digital network trails. The infographic displays three distinct, parallel glowing paths (streams) representing the work of three team groups:
+1. "Group A (DB & Platform)" as a vibrant glowing orange/red path at the top, with 5 sequential nodes labeled:
+   - "Challenge 1: AlloyDB & CDC"
+   - "Challenge 2: Agentic DB Layer"
+   - "Challenge 7: BQ to AlloyDB Sync"
+   - "Challenge 8: DB Tools via MCP"
+   - "Challenge 9: Guest Assistant App"
+2. "Group B (Data Science)" as a glowing cyan/blue path in the middle, with 1 node labeled:
+   - "Challenge 3: Sentiment & Forecasting"
+   - Winding dashed connector lines should extend from this path to show Group B assisting Group C with Challenge 6 and Group A with Challenge 9 later in the timeline.
+3. "Group C (AI & Graphs)" as a glowing green path at the bottom, with 3 sequential nodes labeled:
+   - "Challenge 4: Multimodal & RAG"
+   - "Challenge 5: Graph Analytics"
+   - "Challenge 6: Conversational Analytics"
+All three paths eventually converge at the far right into a final glowing Google Cloud logo node labeled "Result" or "Success".
 At the top, the title "3-GROUP PARALLELIZATION TIMELINE (4 HOURS)" is written in a sleek, modern, professional font. The entire graphic features glowing neon nodes, glossy glassmorphism badges, and a premium digital technology aesthetic. No device frames.
